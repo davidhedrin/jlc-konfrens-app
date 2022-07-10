@@ -102,7 +102,7 @@
                     </a>
                     <ul class="menu-sub">
                         <li>
-                            <a href="" class="menu-link">
+                            <a href="{{ route('all.assets') }}" class="menu-link">
                                 <div data-i18n="Without menu">All Asset</div>
                             </a>
                         </li>

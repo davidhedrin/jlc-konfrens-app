@@ -10,6 +10,7 @@ use App\Http\Livewire\UserManagementComponent;
 use App\Http\Livewire\JemaatComponent;
 use App\Http\Livewire\JabatanComponent;
 use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\FixedAssetComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::middleware('guest')->group(function(){
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/', HomeComponent::class)->name('index');
     Route::get('/my-profile', ProfileComponent::class)->name('myProfile');
+    Route::get('/all-assets', FixedAssetComponent::class)->name('all.assets');
 });
 
 //For Admin
