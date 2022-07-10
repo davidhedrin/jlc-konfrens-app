@@ -74,6 +74,26 @@
         </div>
     </div>
     
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+        @forelse ($jabatanCards as $jab)
+        <div class="col">
+            <div class="card h-100 text-center">
+                <span class="fw-bold mt-4" style="font-size: 50px">{{ $jab->kode_jabatan }}</span>
+                <div class="card-body">
+                    <h5 class="card-title">{{ $jab->nama_jabatan }}</h5>
+                    <p class="card-text">
+                    {{ $jab->ket_jabatan }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        @empty
+        <tr>
+            <td class="text-center" colspan="4">Data Kosong/Tidak Ditemukan!</td>
+        </tr>
+        @endforelse
+    </div>
+    
     <!-- Modal Add -->
     <div wire:ignore.self class="modal fade" id="modal-fromAdd-jabatan" data-bs-backdrop="static" tabindex="-1"
         aria-hidden="true">

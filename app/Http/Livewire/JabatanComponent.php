@@ -88,7 +88,11 @@ class JabatanComponent extends Component
 
     public function render()
     {
-        $jabatans = Jabatan::where('nama_jabatan', 'like', '%'.$this->search.'%')->paginate(10); 
-        return view('livewire.jabatan-component', ['jabatans' => $jabatans])->layout('layouts.base');
+        $jabatans = Jabatan::where('nama_jabatan', 'like', '%'.$this->search.'%')->paginate(10);
+        $jabatanCards = Jabatan::paginate(10);
+        return view('livewire.jabatan-component', [
+            'jabatans' => $jabatans,
+            'jabatanCards' => $jabatanCards,
+        ])->layout('layouts.base');
     }
 }

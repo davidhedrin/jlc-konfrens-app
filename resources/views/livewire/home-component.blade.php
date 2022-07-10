@@ -1,4 +1,45 @@
 <div>
+    {{-- <div class="container-p-y">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" style="height: 500px">
+                <div class="carousel-item active" style="height: 500px">
+                    <img class="d-block w-100" src="../assets/img/elements/13.jpg" alt="First slide" height="500" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>First slide</h3>
+                        <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height: 500px">
+                    <img class="d-block w-100" src="../assets/img/elements/2.jpg" alt="Second slide" height="500" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Second slide</h3>
+                        <p>In numquam omittam sea.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height: 500px">
+                    <img class="d-block w-100" src="../assets/img/elements/18.jpg" alt="Third slide" height="500" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Third slide</h3>
+                        <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco mel no.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div> --}}
+
     <div class="row">
         <div class="col-lg-3 mb-4">
             <div class="card">
@@ -101,7 +142,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <!-- Order Statistics -->
         <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
@@ -149,7 +190,8 @@
                         </li>
                         <li class="d-flex mb-4 pb-1">
                             <div class="avatar flex-shrink-0 me-3">
-                                <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
+                                <span class="avatar-initial rounded bg-label-success"><i
+                                        class="bx bx-closet"></i></span>
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -195,7 +237,7 @@
             </div>
         </div>
         <!--/ Order Statistics -->
-    
+
         <!-- Expense Overview -->
         <div class="col-md-6 col-lg-4 order-1 mb-4">
             <div class="card h-100">
@@ -250,7 +292,7 @@
             </div>
         </div>
         <!--/ Expense Overview -->
-    
+
         <!-- Transactions -->
         <div class="col-md-6 col-lg-4 order-2 mb-4">
             <div class="card h-100">
@@ -272,7 +314,8 @@
                     <ul class="p-0 m-0">
                         <li class="d-flex mb-4 pb-1">
                             <div class="avatar flex-shrink-0 me-3">
-                                <img src="{{ asset('assets/img/icons/unicons/paypal.png') }}" alt="User" class="rounded" />
+                                <img src="{{ asset('assets/img/icons/unicons/paypal.png') }}" alt="User"
+                                    class="rounded" />
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -287,7 +330,8 @@
                         </li>
                         <li class="d-flex mb-4 pb-1">
                             <div class="avatar flex-shrink-0 me-3">
-                                <img src="{{ asset('assets/img/icons/unicons/wallet.png') }}" alt="User" class="rounded" />
+                                <img src="{{ asset('assets/img/icons/unicons/wallet.png') }}" alt="User"
+                                    class="rounded" />
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -302,7 +346,8 @@
                         </li>
                         <li class="d-flex mb-4 pb-1">
                             <div class="avatar flex-shrink-0 me-3">
-                                <img src="{{ asset('assets/img/icons/unicons/chart.png') }}" alt="User" class="rounded" />
+                                <img src="{{ asset('assets/img/icons/unicons/chart.png') }}" alt="User"
+                                    class="rounded" />
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -333,7 +378,8 @@
                         </li>
                         <li class="d-flex mb-4 pb-1">
                             <div class="avatar flex-shrink-0 me-3">
-                                <img src="{{ asset('assets/img/icons/unicons/wallet.png') }}" alt="User" class="rounded" />
+                                <img src="{{ asset('assets/img/icons/unicons/wallet.png') }}" alt="User"
+                                    class="rounded" />
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">

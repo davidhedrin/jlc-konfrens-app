@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 
 class LoginComponent extends Component

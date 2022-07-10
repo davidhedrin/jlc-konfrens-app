@@ -134,6 +134,18 @@
             {{ Session::get('msgAccDenied') }}
         </div>
     </div>
+    @elseif (Session::has('msgDeleteUser'))
+    <div class="bs-toast toast fade show bg-warning toast-placement-ex top-0 end-0"
+        style="margin-top: 20px; margin-right: 25px" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="bx bx-bell me-2"></i>
+            <div class="me-auto fw-semibold">Deleted!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ Session::get('msgDeleteUser') }}
+        </div>
+    </div>
     @endif
     <div class="container-xxl">
         <!-- Form -->

@@ -9,6 +9,7 @@ use App\Http\Livewire\RegisterComponent;
 use App\Http\Livewire\UserManagementComponent;
 use App\Http\Livewire\JemaatComponent;
 use App\Http\Livewire\JabatanComponent;
+use App\Http\Livewire\ProfileComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::middleware('guest')->group(function(){
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/', HomeComponent::class)->name('index');
+    Route::get('/my-profile', ProfileComponent::class)->name('myProfile');
 });
 
 //For Admin

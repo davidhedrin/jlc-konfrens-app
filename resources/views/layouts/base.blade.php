@@ -238,7 +238,7 @@
               <span class="menu-header-text">Account</span>
             </li>
             <li class="menu-item">
-                <a href="index.html" class="menu-link">
+                <a href="{{ route('myProfile') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user me-2"></i>
                     <div data-i18n="Analytics">My Profile</div>
                 </a>
@@ -313,7 +313,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="{{ route('myProfile') }}">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
@@ -369,7 +369,7 @@
                     </div>
                 </div>
               </div>
-                {{ $slot }}
+              {{ $slot }}
             </div>
             <!-- / Content -->
 
