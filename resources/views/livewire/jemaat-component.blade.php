@@ -42,6 +42,7 @@
                                     <th><strong>Kode</strong></th>
                                     <th><strong>Nama Jemaat</strong></th>
                                     <th><strong>Alamat</strong></th>
+                                    <th><strong>Tipe</strong></th>
                                     <th class="text-center"><strong>Status</strong></th>
                                     <th class="text-center" width="80"><strong>Actions</strong></th>
                                 </tr>
@@ -62,6 +63,7 @@
                                         <td>{{ $jem->kode_jemaat }}</td>
                                         <td>{{ $jem->nama_jemaat }}</td>
                                         <td>{{ $jem->alamat }}</td>
+                                        <td>{{ $jem->status_jemaat }}</td>
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center">
                                                 <span class="badge bg-label-{{ $jem->flag_active == "Y" ? "success" : ($jem->flag_active == "N" ? "danger" : "warning") }}">{{ $jem->flag_active == "Y" ? "Active" : ($jem->flag_active == "N" ? "Inactive" : "Panding") }}</span>
@@ -135,10 +137,36 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="tipe-jemaat">Tipe Jemaat <span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <span id="tipe-jemaat2" class="input-group-text"><i class='bx bx-building-house' ></i></span>
+                                        <select class="form-select" id="tipe-jemaat" wire:model="status_jemaat">
+                                            <option value="">Pilih Tipe Jemaat</option>
+                                            <option value="Jemaat diorganiser">Jemaat diorganiser</option>
+                                            <option value="Cabang Sekolah Sabat">Cabang Sekolah Sabat</option>
+                                            <option value="Perkumpulan Sekolah Sabat">Perkumpulan Sekolah Sabat</option>
+                                        </select>
+                                    </div>
+                                    @error('status_jemaat') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="no-rek">No Rek</label>
+                                    <div class="input-group input-group-merge">
+                                        <span id="no-rek2" class="input-group-text"><i class='bx bx-credit-card'></i></span>
+                                        <input wire:model="no_rek" type="text" class="form-control" id="no-rek" placeholder="Masuukan Nomor Rek" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label" for="nama-jemaat">Nama Jemaat <span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
-                                <span id="nama-jemaat2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                                <span id="nama-jemaat2" class="input-group-text"><i class='bx bx-church' ></i></span>
                                 <input wire:model="nama_jemaat" type="text" id="nama-jemaat" class="form-control" placeholder="Masukkan Nama Jabatan" />
                             </div>
                             @error('nama_jemaat') <span class="text-danger">{{ $message }}</span> @enderror
@@ -207,6 +235,32 @@
                                         </select>
                                     </div>
                                     @error('flag_active') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="tipe-jemaat">Tipe Jemaat <span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <span id="tipe-jemaat2" class="input-group-text"><i class='bx bx-building-house' ></i></span>
+                                        <select class="form-select" id="tipe-jemaat" wire:model="status_jemaat">
+                                            <option value="">Pilih Tipe Jemaat</option>
+                                            <option value="Jemaat diorganiser">Jemaat diorganiser</option>
+                                            <option value="Cabang Sekolah Sabat">Cabang Sekolah Sabat</option>
+                                            <option value="Perkumpulan Sekolah Sabat">Perkumpulan Sekolah Sabat</option>
+                                        </select>
+                                    </div>
+                                    @error('status_jemaat') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="no-rek">No Rek</label>
+                                    <div class="input-group input-group-merge">
+                                        <span id="no-rek2" class="input-group-text"><i class='bx bx-credit-card'></i></span>
+                                        <input wire:model="no_rek" type="text" class="form-control" id="no-rek" placeholder="Masuukan Nomor Rek" />
+                                    </div>
                                 </div>
                             </div>
                         </div>

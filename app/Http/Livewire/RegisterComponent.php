@@ -71,6 +71,7 @@ class RegisterComponent extends Component
         $user->jabatan_id = $this->jabatan_id;
         $user->save();
         
+        session()->flush();
         $this->resetFormRegister();
         session()->flash('msgUsersRegis', 'Holaa... Pendaftaran telah berhasil, mohon tunggu sampai admin menyetujui. Terimakasih!');
         return redirect()->route('login');

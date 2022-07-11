@@ -35,9 +35,13 @@ return new class extends Migration
             $table->date('tgl_ke_konfrens')->nullable();
             $table->date('tgl_mulai_kerjasama')->nullable();
             $table->date('tgl_akhir_kerjasama')->nullable();
+            $table->string('sertifikat_file')->nullable();
+            $table->string('imb_file')->nullable();
+            $table->string('history_file')->nullable();
+            $table->string('doc_kerjasama')->nullable();
             $table->string('flag_active')->nullable();
-            $table->foreign('jemaat_id')->references('id')->on('jemaats')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('jenis_fixed_id')->references('id')->on('jenis_fixed_assets')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('jemaat_id')->references('id')->on('jemaats')->onDelete('SET NULL')->onUpdate('cascade');
+            $table->foreign('jenis_fixed_id')->references('id')->on('jenis_fixed_assets')->onDelete('SET NULL')->onUpdate('cascade');
             $table->timestamps();
         });
     }

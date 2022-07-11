@@ -50,32 +50,42 @@
                             <tbody>
                                 @php ($i = 1)
                                 @forelse ($users as $u)
-                                    <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td>{{ $u->jemaat->kode_jemaat }}{{ $u->jabatan->kode_jabatan }}</td>
-                                        <td>{{ $u->name }}</td>
-                                        <td>{{ $u->email }}</td>
-                                        <td>{{ $u->no_phone }}</td>
-                                        <td>{{ $u->user_type }}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center">
-                                                <span class="badge bg-label-{{ $u->flag_active == "Y" ? "success" : ($u->flag_active == "N" ? "danger" : "warning") }}">{{ $u->flag_active == "Y" ? "Active" : ($u->flag_active == "N" ? "Inactive" : "Panding") }}</span>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                    <a class="dropdown-item text-success" href="javascript:void(0);" wire:click="activeUser({{ $u->id }})">Active</a>
-                                                    <a class="dropdown-item text-danger" href="javascript:void(0);" wire:click="inactiveUser({{ $u->id }})">Inactive</a>
-                                                    </div>
+                                <tr>
+                                    <?php
+                                        $kodeJem = null;
+                                        $kodeJab = null;
+                                        if ($u->jemaat_id) {
+                                            $kodeJem = $u->jemaat->kode_jemaat;
+                                        }
+                                        if ($u->jabatan_id) {
+                                            $kodeJab = $u->jabatan->kode_jabatan;
+                                        }
+                                    ?>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $kodeJem != null ? $kodeJem : "!" }}{{ $kodeJab != null ? $kodeJab : "!" }}</td>
+                                    <td>{{ $u->name }}</td>
+                                    <td>{{ $u->email }}</td>
+                                    <td>{{ $u->no_phone }}</td>
+                                    <td>{{ $u->user_type }}</td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center">
+                                            <span class="badge bg-label-{{ $u->flag_active == "Y" ? "success" : ($u->flag_active == "N" ? "danger" : "warning") }}">{{ $u->flag_active == "Y" ? "Active" : ($u->flag_active == "N" ? "Inactive" : "Panding") }}</span>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                <a class="dropdown-item text-success" href="javascript:void(0);" wire:click="activeUser({{ $u->id }})">Active</a>
+                                                <a class="dropdown-item text-danger" href="javascript:void(0);" wire:click="inactiveUser({{ $u->id }})">Inactive</a>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-fromUpdate-user" wire:click="editDataUser({{ $u->id }})"><i class="bx bx-edit-alt me-1"></i></a>
-                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-fromDelete-user" wire:click="deleteJemaat({{ $u->id }})"><i class="bx bx-trash me-1"></i></a>
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-fromUpdate-user" wire:click="editDataUser({{ $u->id }})"><i class="bx bx-edit-alt me-1"></i></a>
+                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-fromDelete-user" wire:click="deleteJemaat({{ $u->id }})"><i class="bx bx-trash me-1"></i></a>
+                                    </td>
+                                </tr>
                                 @empty
                                     <tr>
                                         <td class="text-center" colspan="8">Data kosong/tidak ditemukan</td>
@@ -245,7 +255,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="jemaat_id" class="form-label">Jemaat</label>
+                                    <label for="jemaat_id" class="form-label">Jemaat <span class="text-danger">*</span></label>
                                     <select class="form-select" id="jemaat_id" wire:model="selectJemaat" wire:change="generateUserId">
                                         <option value="">Pilih Jemaat</option>
                                         @foreach ($jemaats as $jem)
@@ -257,7 +267,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="jabatan_id" class="form-label">Jabatan</label>
+                                    <label for="jabatan_id" class="form-label">Jabatan <span class="text-danger">*</span></label>
                                     <select class="form-select" id="jabatan_id" wire:model="selectJabatan" wire:change="generateUserId">
                                         <option value="">Pilih Jabatan</option>
                                         @foreach ($jabatans as $jab)

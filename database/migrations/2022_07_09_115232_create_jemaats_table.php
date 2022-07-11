@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('nama_jemaat');
             $table->text('alamat');
             $table->string('flag_active');
+            $table->string('status_jemaat');
+            $table->string('no_rek')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

@@ -1,6 +1,14 @@
 
-@push ($jemaat = DB::table('jemaats')->where('id', Auth::user()->jemaat_id)->first())
-@push ($jabatan = DB::table('jabatans')->where('id', Auth::user()->jabatan_id)->first())
+@php
+  $jemaat = null;
+  $jabatan = null;
+  if (Auth::user()->jemaat_id) {
+    $jemaat = DB::table('jemaats')->where('id', Auth::user()->jemaat_id)->first();
+  }
+  if (Auth::user()->jabatan_id) {
+    $jabatan = DB::table('jabatans')->where('id', Auth::user()->jabatan_id)->first();
+  }
+@endphp
 
 <!DOCTYPE html>
 <html
@@ -89,125 +97,12 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Rek Konfrens</span>
             </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bx-food-menu'></i>
-                <div data-i18n="Layouts">Transaksi</div>
-              </a>
-
-              <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <div data-i18n="Layouts"><strong>Fixed Asset</strong></div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li>
-                            <a href="{{ route('all.assets') }}" class="menu-link">
-                                <div data-i18n="Without menu">All Asset</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="layouts-without-menu.html" class="menu-link">
-                                <div data-i18n="Without menu">Input Data</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="layouts-without-menu.html" class="menu-link">
-                                <div data-i18n="Without menu">Upload Dokumen</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-              </ul>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <div data-i18n="Layouts"><strong>Approval dan Verify</strong></div>
-                    </a>
-                    <ul class="menu-sub">
-                      <li>
-                          <a href="layouts-without-menu.html" class="menu-link">
-                              <div data-i18n="Without menu">Approval Ketua Jemaat</div>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="layouts-without-menu.html" class="menu-link">
-                              <div data-i18n="Without menu">Verifikasi Legal Dept</div>
-                          </a>
-                      </li>
-                    </ul>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class='menu-icon tf-icons bx bx-receipt'></i>
-                    <div data-i18n="Layouts">Laporan</div>
-                </a>
-
-                <ul class="menu-sub">
-                    <li class="menu-item">
-                        <a href="pages-account-settings-account.html" class="menu-link">
-                          <div data-i18n="Account"><strong>Daftar Fixed Asset</strong></div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <div data-i18n="Layouts"><strong>Belum Published</strong></div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li>
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Belum Approval Ketua</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Belum Verifikasi Legal</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="menu-sub">
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <div data-i18n="Layouts"><strong>Export Data</strong></div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li>
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">To Excel</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">To PDF</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
             
             <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class='menu-icon tf-icons bx bx-book-bookmark'></i>
-                  <div data-i18n="Account Settings">Utility</div>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="pages-account-settings-account.html" class="menu-link">
-                      <div data-i18n="Account"><strong>User Maintain</strong></div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="pages-account-settings-notifications.html" class="menu-link">
-                      <div data-i18n="Notifications"><strong>Daftar Jemaat</strong></div>
-                    </a>
-                  </li>
-                </ul>
+              <a href="{{ route('all.assets') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-food-menu'></i>
+                  <div data-i18n="Analytics">Transaksi</div>
+              </a>
             </li>
 
             @if (Auth::user()->user_type === 'ADM')
@@ -303,7 +198,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">{{ $jemaat->kode_jemaat }}{{ $jabatan->kode_jabatan }}</span>
+                            <span class="fw-semibold d-block">{{ $jemaat != null ? $jemaat->kode_jemaat : "!" }}{{ $jabatan != null ? $jabatan->kode_jabatan : "!" }}</span>
                             <small class="text-muted">{{ Auth::user()->user_type == 'ADM' ? 'Admin' : (Auth::user()->user_type == 'USR' ? 'User' : 'Jemaat' ) }}</small>
                           </div>
                         </div>
@@ -352,7 +247,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Welcome, {{ Auth::user()->user_type === 'ADM' ? 'Admin' : (Auth::user()->user_type === 'USR' ? 'User' : 'Jemaat' ) }}!🎉</h5>
                                     <p class="mb-4">
-                                      Jemaat <span class="fw-bold">{{ $jemaat->nama_jemaat }}</span>, sebagai <span class="fw-bold">{{ $jabatan->nama_jabatan }}</span>
+                                      Jemaat <span class="fw-bold">{{ $jemaat != null ? $jemaat->nama_jemaat : "!" }}</span>, sebagai <span class="fw-bold">{{ $jabatan != null ? $jabatan->nama_jabatan : "!" }}</span>
                                     </p>
             
                                     <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Profile</a>

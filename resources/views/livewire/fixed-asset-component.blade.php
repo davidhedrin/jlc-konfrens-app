@@ -108,7 +108,7 @@
                                                 <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-editData-assets" wire:click="editDataFixedAsset({{ $ast->id }})"><i class="bx bx-edit-alt me-1"></i></a>
                                                 <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-delete-assets" wire:click="deleteFixedAsset({{ $ast->id }})"><i class="bx bx-trash me-1"></i></a>
                                             @else
-                                                <a href="javascript:void(0);" wire:click=""><i class='bx bx-info-circle'></i> Detail</a>
+                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-detailUser-assets" wire:click="detailDataFixedAsset({{ $ast->id }})"><i class='bx bx-info-circle'></i> Detail</a>
                                             @endif
                                         </td>
                                     </tr>
@@ -490,8 +490,242 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Detail User -->
+    <div wire:ignore.self  class="modal fade" id="modal-detailUser-assets" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="margin-right: 10px" id="exampleModalLabel4">Edit Fixed Asset</h5>
+                    @if ($findAssetDetail)
+                    <span class="badge bg-label-{{ $findAssetDetail->flag_active == "Y" ? "success" : ($findAssetDetail->flag_active == "N" ? "danger" : "warning") }}">{{ $findAssetDetail->flag_active == "Y" ? "Active" : ($findAssetDetail->flag_active == "N" ? "Inactive" : "Panding") }}</span>
+                    @endif
+                    <button wire:click="resetModelDetailAsset" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                @if ($findAssetDetail)
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Jemaat <span class="text-danger">*</span></label>
+                            <div><h5>{{ $findAssetDetail->jemaat->nama_jemaat }}</h5></div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Jenis Fixed <span class="text-danger">*</span></label>
+                            <div><h5>{{ $findAssetDetail->jenisAsset->nama_jenis_fixed_asset }}</h5></div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Nomor Sertikat <span class="text-danger">*</span></label>
+                            <div><h5>{{ $findAssetDetail->no_sertifikat }}</h5></div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Atas Nama <span class="text-danger">*</span></label>
+                            <div><h5>{{ $findAssetDetail->atas_nama }}</h5></div>
+                        </div>
+
+                        
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Status Pemilikan</label>
+                            @if ($findAssetDetail->status_kepemilikan)
+                            <div><h5>{{ $findAssetDetail->status_kepemilikan }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Diterbitkan Oleh</label>
+                            @if ($findAssetDetail->terbit_oleh)
+                            <div><h5>{{ $findAssetDetail->terbit_oleh }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Luas Tanah (M2)</label>
+                            @if ($findAssetDetail->luas_tanah)
+                            <div><h5>{{ $findAssetDetail->luas_tanah }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label">Bangunan</label>
+                            @if ($findAssetDetail->nama_bangunan)
+                            <div><h5>{{ $findAssetDetail->nama_bangunan }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+
+
+                        <div class="col-md-3 mb-2">
+                            <label for="tanggal_sertif" class="col-form-label">Tanggal Sertifikat</label>
+                            @if ($findAssetDetail->tgl_sertifikat)
+                            <div><h5>{{ $findAssetDetail->tgl_sertifikat }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="tanggal_expired" class="col-form-label">Tanggal Expired</label>
+                            @if ($findAssetDetail->tgl_expired)
+                            <div><h5>{{ $findAssetDetail->tgl_expired }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="no_imb" class="form-label">Nomor IMB</label>
+                            @if ($findAssetDetail->no_imb)
+                            <div><h5>{{ $findAssetDetail->no_imb }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="tanggal_imb" class="col-form-label">Tanggal IMB</label>
+                            @if ($findAssetDetail->tgl_imb)
+                            <div><h5>{{ $findAssetDetail->tgl_imb }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+
+                        
+                        <div class="col-md-12 mb-2">
+                            <label for="lokasi_fisi" class="form-label">Lokasi Fisi Bangunan</label>
+                            @if ($findAssetDetail->lok_fisik_bangunan)
+                            <div><h5>{{ $findAssetDetail->lok_fisik_bangunan }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+
+                        
+                        <div class="col-md-3 mb-2">
+                            <label for="posisi_surat" class="form-label">Posisi Surat</label>
+                            @if ($findAssetDetail->posisi_surat)
+                            <div><h5>{{ $findAssetDetail->posisi_surat }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="kerjasama_pihak" class="form-label">Kerjasama Pihak Ke 3</label>
+                            @if ($findAssetDetail->pihak_ke3)
+                            <div><h5>{{ $findAssetDetail->pihak_ke3 }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="pemanfaatan_untuk" class="form-label">Pemanfaatan untuk</label>
+                            @if ($findAssetDetail->manfaat_untuk)
+                            <div><h5>{{ $findAssetDetail->manfaat_untuk }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="tgl_kekonfrens" class="col-form-label">Tgl Ke Konfrens</label>
+                            @if ($findAssetDetail->tgl_ke_konfrens)
+                            <div><h5>{{ $findAssetDetail->tgl_ke_konfrens }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+
+                        
+                        <div class="col-md-6 mb-2">
+                            <label for="tgl_mulai_kerjasama" class="col-form-label">Tgl Mulai Kerjasama</label>
+                            @if ($findAssetDetail->tgl_mulai_kerjasama)
+                            <div><h5>{{ $findAssetDetail->tgl_mulai_kerjasama }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="tgl_akhir_kerjasama" class="col-form-label">Tgl Berakhir Kerjasama</label>
+                            @if ($findAssetDetail->tgl_akhir_kerjasama)
+                            <div><h5>{{ $findAssetDetail->tgl_akhir_kerjasama }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+
+                        
+                        <div class="col-md-12 mb-2">
+                            <label for="ket_sertifikat" class="form-label">Keterangan</label>
+                            @if ($findAssetDetail->ket_sertifikat)
+                            <div><h5>{{ $findAssetDetail->ket_sertifikat }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+
+                        <span class="mb-1 mt-1" style="font-style: italic">Supporting Dokumen (Valid hanya file yg bertipe PDF dan jpg saja). Kosongkan jika tidak ada Dokumen Lampiran</span>
+                        
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label" for="newsertifikat_file">Sertifikat</label>
+                            @if ($findAssetDetail->sertifikat_file)
+                            <div><h5>{{ $findAssetDetail->sertifikat_file }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label" for="newimb_file">IMB</label>
+                            @if ($findAssetDetail->imb_file)
+                            <div><h5>{{ $findAssetDetail->imb_file }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label" for="newhistory_file">History</label>
+                            @if ($findAssetDetail->history_file)
+                            <div><h5>{{ $findAssetDetail->history_file }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label class="form-label" for="newdoc_kerjasama">Dok Kerjasama</label>
+                            @if ($findAssetDetail->doc_kerjasama)
+                            <div><h5>{{ $findAssetDetail->doc_kerjasama }}</h5></div>
+                            @else
+                            <div><h5>-</h5></div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @else
+                <div class="modal-body d-flex justify-content-center">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="spinner-border text-dark" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                          </td>
+                          <td>
+                            <span style="margin-left: 10px">Mohon tunggu...</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                @endif
+                <div class="modal-footer">
+                    <button wire:click="resetModelDetailAsset" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript">    
+<script type="text/javascript">
     window.addEventListener('close-form-modal', event => {
         $('#modal-addnew-assets').modal('hide');
         $('#modal-delete-assets').modal('hide');

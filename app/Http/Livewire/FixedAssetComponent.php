@@ -275,6 +275,16 @@ class FixedAssetComponent extends Component
         session()->flash('msgAssets', 'User telah berhasil dinonaktifkan!');
     }
 
+    public $findAssetDetail;
+    public function detailDataFixedAsset(int $asset_id)
+    {
+        $this->findAssetDetail = FixedAsset::find($asset_id);
+    }
+    public function resetModelDetailAsset()
+    {
+        $this->findAssetDetail = null;
+    }
+
     public function render()
     {
         $jeins_fxs = JenisFixedAsset::all();

@@ -14,6 +14,7 @@ class JemaatComponent extends Component
     use WithFileUploads;
     use WithPagination;
     public $image, $kode_jemaat, $nama_jemaat, $alamat, $flag_active, $jemaat_id, $newImage;
+    public $status_jemaat, $no_rek;
     public $search = '';
 
     public function updated($fields)
@@ -24,6 +25,7 @@ class JemaatComponent extends Component
             'nama_jemaat' => 'required',
             'alamat' => 'required',
             'flag_active' => 'required',
+            'status_jemaat' => 'required',
         ]);
     }
     public function resetFromAddJemaat()
@@ -33,6 +35,8 @@ class JemaatComponent extends Component
         $this->nama_jemaat = null;
         $this->alamat = null;
         $this->flag_active = null;
+        $this->status_jemaat = null;
+        $this->no_rek = null;
         $this->newImage = null;
     }
     
@@ -44,6 +48,7 @@ class JemaatComponent extends Component
             'nama_jemaat' => 'required',
             'alamat' => 'required',
             'flag_active' => 'required',
+            'status_jemaat' => 'required',
         ]);
         $jemaat = new Jemaat();
         if($this->image){
@@ -55,6 +60,8 @@ class JemaatComponent extends Component
         $jemaat->nama_jemaat = $this->nama_jemaat;
         $jemaat->alamat = $this->alamat;
         $jemaat->flag_active = $this->flag_active;
+        $jemaat->status_jemaat = $this->status_jemaat;
+        $jemaat->no_rek = $this->no_rek;
         $jemaat->save();
 
         $this->resetFromAddJemaat();
@@ -72,6 +79,8 @@ class JemaatComponent extends Component
             $this->nama_jemaat = $jemaat->nama_jemaat;
             $this->alamat = $jemaat->alamat;
             $this->flag_active = $jemaat->flag_active;
+            $this->status_jemaat = $jemaat->status_jemaat;
+            $this->no_rek = $jemaat->no_rek;
         }else{
             return redirect()->route('all.jemaat');
         }
@@ -84,6 +93,7 @@ class JemaatComponent extends Component
             'nama_jemaat' => 'required',
             'alamat' => 'required',
             'flag_active' => 'required',
+            'status_jemaat' => 'required',
         ]);
 
         $jemaat = Jemaat::find($this->jemaat_id);
@@ -97,6 +107,8 @@ class JemaatComponent extends Component
         $jemaat->nama_jemaat = $this->nama_jemaat;
         $jemaat->alamat = $this->alamat;
         $jemaat->flag_active = $this->flag_active;
+        $jemaat->status_jemaat = $this->status_jemaat;
+        $jemaat->no_rek = $this->no_rek;
         $jemaat->save();
         
         $this->resetFromAddJemaat();
