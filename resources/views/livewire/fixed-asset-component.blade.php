@@ -16,21 +16,47 @@
     <div class="row">
         <div class="col-lg-12 mb-4 order-0">
             <div class="card">
-                <div class="card-header row">
-                    <div class="col-md-6">
-                        <h5 class="mb-0">Tabel Fixed Assets:</h5>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-end">
-                            <div style="margin-right: 10px">
-                                <input wire:model="" class="form-control" style="width: 250px" type="search"
-                                    id="search-user" placeholder="Temukan User...">
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-success mr-3" data-bs-toggle="modal"
-                                    data-bs-target="#modal-addnew-assets">Tambah</button>
-                            </div>
+                <div class="card-header">
+                    <div class="row gx-3 gy-2 align-items-center">
+                        {{-- <div class="col-md-7">
+                            <h5 class="mb-0">Tabel Fixed Assets:</h5>
                         </div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="jenis_fixed_id" wire:model="selectJenis">
+                                <option value="">Pilih Jenis</option>
+                                @foreach ($jeins_fxs as $jfs)
+                                <option value="{{ $jfs->id }}">{{ $jfs->nama_jenis_fixed_asset }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input wire:model="search" class="form-control" type="search" id="search-user" placeholder="Temukan User...">
+                        </div>
+                        <div class="col-md-1 text-end">
+                            <button type="button" class="btn btn-success mr-3" data-bs-toggle="modal"
+                                data-bs-target="#modal-addnew-assets">Tambah</button>
+                        </div> --}}
+
+                        <div class="col-md-{{ Auth::user()->user_type == "ADM" ? '7' : '8' }}">
+                            <h5 class="mb-0">Tabel Fixed Assets:</h5>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select" id="jenis_fixed_id"  wire:model="selectJenis">
+                                <option value="">Pilih Jenis</option>
+                                @foreach ($jeins_fxs as $jfs)
+                                <option value="{{ $jfs->id }}">{{ $jfs->nama_jenis_fixed_asset }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input wire:model="search" class="form-control" type="search" id="search-user" placeholder="Temukan User...">
+                        </div>
+                        @if (Auth::user()->user_type == "ADM")
+                        <div class="col-md-1 text-end">
+                            <button type="button" class="btn btn-success mr-3" data-bs-toggle="modal"
+                                data-bs-target="#modal-addnew-assets">Tambah</button>
+                        </div>
+                        @endif
                     </div>
                 </div>
 
@@ -46,7 +72,7 @@
                                     <th><strong>Terbit Oleh</strong></th>
                                     <th><strong>No IMB</strong></th>
                                     <th class="text-center"><strong>Status</strong></th>
-                                    <th class="text-center" width="80"><strong>Actions</strong></th>
+                                    <th class="text-center" width="110"><strong>Actions</strong></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,20 +88,28 @@
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center">
                                                 <span class="badge bg-label-{{ $ast->flag_active == "Y" ? "success" : ($ast->flag_active == "N" ? "danger" : "warning") }}">{{ $ast->flag_active == "Y" ? "Active" : ($ast->flag_active == "N" ? "Inactive" : "Panding") }}</span>
+                                                
+                                                @if (Auth::user()->user_type == "ADM")
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                    <a class="dropdown-item text-success" href="javascript:void(0);" wire:click="activeUser({{ $ast->id }})">Active</a>
-                                                    <a class="dropdown-item text-danger" href="javascript:void(0);" wire:click="inactiveUser({{ $ast->id }})">Inactive</a>
+                                                    <a class="dropdown-item text-success" href="javascript:void(0);" wire:click="activeAsset({{ $ast->id }})">Active</a>
+                                                    <a class="dropdown-item text-danger" href="javascript:void(0);" wire:click="inactiveAsset({{ $ast->id }})">Inactive</a>
                                                     </div>
                                                 </div>
+                                                @endif
+                                                
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-fromUpdate-user" wire:click="editDataUser({{ $ast->id }})"><i class="bx bx-edit-alt me-1"></i></a>
-                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-fromDelete-user" wire:click="deleteJemaat({{ $ast->id }})"><i class="bx bx-trash me-1"></i></a>
+                                            @if (Auth::user()->user_type == "ADM")
+                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-editData-assets" wire:click="editDataFixedAsset({{ $ast->id }})"><i class="bx bx-edit-alt me-1"></i></a>
+                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-delete-assets" wire:click="deleteFixedAsset({{ $ast->id }})"><i class="bx bx-trash me-1"></i></a>
+                                            @else
+                                                <a href="javascript:void(0);" wire:click=""><i class='bx bx-info-circle'></i> Detail</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @empty
@@ -101,7 +135,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel4">Tambah Fixed Asset</h5>
-                    <button wire.click="resetFormAddAsset" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button wire:click="resetFormAddAsset" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form wire:submit.prevent="stroreFixedAsset">
                     <div class="modal-body">
@@ -250,7 +284,7 @@
                         <span style="font-style: italic; font-size:12px">Kolom dengan tanda bintang merah <span class="text-danger">(*)</span> wajib diisi</span>
                     </div>
                     <div class="modal-footer">
-                        <button wire.click="resetFormAddAsset" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <button wire:click="resetFormAddAsset" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -259,9 +293,208 @@
             </div>
         </div>
     </div>
+    <!-- Extra Large Modal -->
+    <div wire:ignore.self  class="modal fade" id="modal-editData-assets" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="margin-right: 10px" id="exampleModalLabel4">Edit Fixed Asset</h5>
+                    <span class="badge bg-label-{{ $flag_active == "Y" ? "success" : ($flag_active == "N" ? "danger" : "warning") }}">{{ $flag_active == "Y" ? "Active" : ($flag_active == "N" ? "Inactive" : "Panding") }}</span>
+                    <button wire:click="resetFormAddAsset" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form wire:submit.prevent="updateDataEditAsset">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3 mb-2">
+                                <label for="jemaat_id" class="form-label">Jemaat <span class="text-danger">*</span></label>
+                                <select class="form-select" id="jemaat_id" wire:model="jemaat_id">
+                                    <option value="">Pilih Jemaat</option>
+                                    @foreach ($jemaats as $jem)
+                                    <option value="{{ $jem->id }}">{{ $jem->nama_jemaat }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jemaat_id') <span class="text-danger">Kolom ini harus diisi</span> @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="jenis_fixed_id" class="form-label">Jenis Fixed <span class="text-danger">*</span></label>
+                                <select class="form-select" id="jenis_fixed_id" wire:model="jenis_fixed_id">
+                                    <option value="">Pilih Jenis</option>
+                                    @foreach ($jeins_fxs as $jfs)
+                                    <option value="{{ $jfs->id }}">{{ $jfs->nama_jenis_fixed_asset }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jenis_fixed_id') <span class="text-danger">Kolom ini harus diisi</span> @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="no_sertifikat" class="form-label">Nomor Sertikat <span class="text-danger">*</span></label>
+                                <input wire:model="no_sertifikat" class="form-control" type="text" id="no_sertifikat" placeholder="Masukkan Nomor Sertikat">
+                                @error('no_sertifikat') <span class="text-danger">Kolom ini harus diisi</span> @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="atas_nama" class="form-label">Atas Nama <span class="text-danger">*</span></label>
+                                <input wire:model="atas_nama" class="form-control" type="text" id="atas_nama" placeholder="Masukkan Atas Nama" />
+                                @error('atas_nama') <span class="text-danger">Kolom ini harus diisi</span> @enderror
+                            </div>
+    
+                            
+                            <div class="col-md-3 mb-2">
+                                <label for="status_pemilik" class="form-label">Status Pemilikan</label>
+                                <select class="form-select" id="status_pemilik" wire:model="status_kepemilikan">
+                                    <option value="">Status Surat/Pemilikan</option>
+                                    <option value="Surat Hak Milik">Surat Hak Milik</option>
+                                    <option value="Hak Guna Bangunan">Hak Guna Bangunan</option>
+                                    <option value="Girik">Girik</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="terbit_oleh" class="form-label">Diterbitkan Oleh</label>
+                                <input wire:model="terbit_oleh" class="form-control" type="text" id="terbit_oleh" placeholder="Diterbitkan Oleh">
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="laur_tanah" class="form-label">Luas Tanah (M2)</label>
+                                <input wire:model="luas_tanah" class="form-control" type="text" id="laur_tanah" placeholder="Masukkan Luar Tanah(m2)">
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="nama_bangunan" class="form-label">Bangunan</label>
+                                <input wire:model="nama_bangunan" class="form-control" type="text" id="nama_bangunan" placeholder="Masukkan Nama Bangunan" />
+                            </div>
+
+
+                            <div class="col-md-3 mb-2">
+                                <label for="tanggal_sertif" class="col-form-label">Tanggal Sertifikat</label>
+                                <input wire:model="tgl_sertifikat" class="form-control" type="date" id="tanggal_sertif" />
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="tanggal_expired" class="col-form-label">Tanggal Expired</label>
+                                <input wire:model="tgl_expired" class="form-control" type="date" id="tanggal_expired" />
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="no_imb" class="form-label">Nomor IMB</label>
+                                <input wire:model="no_imb" class="form-control" type="text" id="no_imb" placeholder="Masukkan Nomor IMB" />
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="tanggal_imb" class="col-form-label">Tanggal IMB</label>
+                                <input wire:model="tgl_imb" class="form-control" type="date" id="tanggal_imb" />
+                            </div>
+    
+                            
+                            <div class="col-md-12 mb-2">
+                                <label for="lokasi_fisi" class="form-label">Lokasi Fisi Bangunan</label>
+                                <textarea wire:model="lok_fisik_bangunan" class="form-control" id="lokasi_fisi" placeholder="Masukkan Lokasi Fisik"></textarea>
+                            </div>
+    
+                            
+                            <div class="col-md-3 mb-2">
+                                <label for="posisi_surat" class="form-label">Posisi Surat</label>
+                                <select class="form-select" id="posisi_surat" wire:model="posisi_surat">
+                                    <option value="">Pilih Posisi Surat</option>
+                                    <option value="Kantor Konfrens">Kantor Konfrens</option>
+                                    <option value="Jemaat Setempat">Jemaat Setempat</option>
+                                    <option value="Lain-lainnya">Lain-lainnya</option>
+                                    <option value="Tidak Diketahui">Tidak Diketahui</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="kerjasama_pihak" class="form-label">Kerjasama Pihak Ke 3</label>
+                                <input wire:model="pihak_ke3" class="form-control" type="text" id="kerjasama_pihak" placeholder="Masukkan Pihak Ketiga" />
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="pemanfaatan_untuk" class="form-label">Pemanfaatan untuk</label>
+                                <input wire:model="manfaat_untuk" class="form-control" type="text" id="pemanfaatan_untuk" placeholder="Masukkan Pemanfaatan Untuk" />
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="tgl_kekonfrens" class="col-form-label">Tgl Ke Konfrens</label>
+                                <input wire:model="tgl_ke_konfrens" class="form-control" type="date" id="tgl_kekonfrens" />
+                            </div>
+    
+                            
+                            <div class="col-md-6 mb-2">
+                                <label for="tgl_mulai_kerjasama" class="col-form-label">Tgl Mulai Kerjasama</label>
+                                <input wire:model="tgl_mulai_kerjasama" class="form-control" type="date" id="tgl_mulai_kerjasama" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="tgl_akhir_kerjasama" class="col-form-label">Tgl Berakhir Kerjasama</label>
+                                <input wire:model="tgl_akhir_kerjasama" class="form-control" type="date" id="tgl_akhir_kerjasama" />
+                            </div>
+    
+                            
+                            <div class="col-md-12 mb-2">
+                                <label for="ket_sertifikat" class="form-label">Keterangan</label>
+                                <textarea wire:model="ket_sertifikat" class="form-control" id="ket_sertifikat" placeholder="Masukkan Keterangan Sertifikat"></textarea>
+                            </div>
+
+                            <span class="mb-1 mt-1" style="font-style: italic">Supporting Dokumen (Valid hanya file yg bertipe PDF dan jpg saja). Kosongkan jika tidak ada Dokumen Lampiran</span>
+                            
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label" for="newsertifikat_file">Sertifikat</label>
+                                <input class="form-control" type="file" id="newsertifikat_file" wire:model="newsertifikat_file" />
+                                @if ($sertifikat_file)
+                                    <span>{{ $sertifikat_file }}</span>
+                                @endif
+                                @error('newsertifikat_file') <span class="text-danger">Harus tipe pdf/jpg</span> @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label" for="newimb_file">IMB</label>
+                                <input class="form-control" type="file" id="newimb_file" wire:model="newimb_file" />
+                                @if ($imb_file)
+                                    <span>{{ $imb_file }}</span>
+                                @endif
+                                @error('newimb_file') <span class="text-danger">Harus tipe pdf/jpg</span> @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label" for="newhistory_file">History</label>
+                                <input class="form-control" type="file" id="newhistory_file" wire:model="newhistory_file" />
+                                @if ($history_file)
+                                    <span>{{ $history_file }}</span>
+                                @endif
+                                @error('newhistory_file') <span class="text-danger">Harus tipe pdf/jpg</span> @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label class="form-label" for="newdoc_kerjasama">Dok Kerjasama</label>
+                                <input class="form-control" type="file" id="newdoc_kerjasama" wire:model="newdoc_kerjasama" />
+                                @if ($doc_kerjasama)
+                                    <span>{{ $doc_kerjasama }}</span>
+                                @endif
+                                @error('newdoc_kerjasama') <span class="text-danger">Harus tipe pdf/jpg</span> @enderror
+                            </div>
+                        </div>
+                        <span style="font-style: italic; font-size:12px">Kolom dengan tanda bintang merah <span class="text-danger">(*)</span> wajib diisi</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button wire:click="resetFormAddAsset" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Delete -->
+    <div wire:ignore.self class="modal fade" id="modal-delete-assets" tabindex="-1" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <i class='bx bx-info-circle mb-2' style="color:lightblue; font-size: 100px"></i>
+                    <h4>Konfirmasi Delete</h4>
+                    <span>Yakin ingin menghapus asset?</span>
+                    <div class="mt-3">
+                        <form action="" wire:submit.prevent="destroyAsset">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">    
     window.addEventListener('close-form-modal', event => {
         $('#modal-addnew-assets').modal('hide');
+        $('#modal-delete-assets').modal('hide');
+        $('#modal-editData-assets').modal('hide');
     });
 </script>

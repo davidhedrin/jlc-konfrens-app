@@ -110,7 +110,9 @@ class JemaatComponent extends Component
     }
     public function destroyJemaat()
     {
-        Jemaat::find($this->jemaat_id)->delete();
+        $jemaat = Jemaat::find($this->jemaat_id);
+        Storage::delete('jemaats/' . $jemaat->image);
+        $jemaat->delete();
 
         $this->resetFromAddJemaat();
         $this->dispatchBrowserEvent('close-form-modal');
