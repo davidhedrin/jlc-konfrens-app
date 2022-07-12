@@ -11,6 +11,7 @@ use App\Http\Livewire\JemaatComponent;
 use App\Http\Livewire\JabatanComponent;
 use App\Http\Livewire\ProfileComponent;
 use App\Http\Livewire\FixedAssetComponent;
+use App\Http\Livewire\ConvertPdfAssetComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/', HomeComponent::class)->name('index');
     Route::get('/my-profile', ProfileComponent::class)->name('myProfile');
     Route::get('/all-assets', FixedAssetComponent::class)->name('all.assets');
+
+    Route::get('/convert-pdf-asset/{assetId}', [ConvertPdfAssetComponent::class, 'exportPdfAsset'])->name('asset.pdf');
 });
 
 //For Admin

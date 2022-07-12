@@ -121,7 +121,7 @@
                             </tbody>
                         </table>
                         <div class="mt-3">
-                            {{-- {{ $assets->links() }} --}}
+                            {{ $assets->links() }}
                         </div>
                     </div>
                 </div>
@@ -465,7 +465,7 @@
                         <button wire:click="resetFormAddAsset" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="button" class="btn btn-success"><i class='bx bx-printer'></i> Print</button>
+                        <a href="{{ route('asset.pdf', ['assetId' => $id_asset != null ? $id_asset : 0]) }}" type="button" class="btn btn-success" ><i class='bx bx-printer'></i> PDF</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
@@ -723,8 +723,16 @@
                         Close
                     </button>
                     
-                    @if ($findAssetDetail)
-                    <button type="button" class="btn btn-success" wire:click="printFixedAsset({{ $findAssetDetail->id }})"><i class='bx bx-printer'></i> Print</button>
+                    @if (Auth::user()->user_type == "ADM")
+                        @if ($findAssetDetail)
+                        <a href="{{ route('asset.pdf', ['assetId' => $findAssetDetail->id]) }}" type="button" class="btn btn-success" ><i class='bx bx-printer'></i> PDF</a>
+                        @endif
+                    @else    
+                        @if ($findAssetDetail && $findAssetDetail->flag_active == "Y")
+                        <a href="{{ route('asset.pdf', ['assetId' => $findAssetDetail->id]) }}" type="button" class="btn btn-success" ><i class='bx bx-printer'></i> PDF</a>
+                        @elseif ($findAssetDetail && $findAssetDetail->flag_active == "N")
+                        <button type="button" class="btn btn-secondary" disabled><i class='bx bx-printer'></i> PDF</button>
+                        @endif
                     @endif
                 </div>
             </div>

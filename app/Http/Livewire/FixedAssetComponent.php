@@ -263,6 +263,11 @@ class FixedAssetComponent extends Component
     public function activeAsset(int $asset_id)
     {
         $asset = FixedAsset::find($asset_id);
+        if(!$asset->flag_active){
+            $asset->signer_asset = Auth::user()->name;
+            $asset->active_sig_date = Carbon::now()->format('d F Y');
+            $asset->active_sig_datetime = Carbon::now();
+        }
         $asset->flag_active = "Y";
         $asset->save();
         session()->flash('msgAssets', 'User telah berhasil diaktifkan!');
