@@ -51,18 +51,8 @@
                                 @php ($i = 1)
                                 @forelse ($users as $u)
                                 <tr>
-                                    <?php
-                                        $kodeJem = null;
-                                        $kodeJab = null;
-                                        if ($u->jemaat_id) {
-                                            $kodeJem = $u->jemaat->kode_jemaat;
-                                        }
-                                        if ($u->jabatan_id) {
-                                            $kodeJab = $u->jabatan->kode_jabatan;
-                                        }
-                                    ?>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $kodeJem != null ? $kodeJem : "!" }}{{ $kodeJab != null ? $kodeJab : "!" }}</td>
+                                    <td>{{ $u->jemaat_id != null ? $u->jemaat->kode_jemaat : "!" }}{{ $u->jabatan_id != null ? $u->jabatan->kode_jabatan : "!" }}</td>
                                     <td>{{ $u->name }}</td>
                                     <td>{{ $u->email }}</td>
                                     <td>{{ $u->no_phone }}</td>
@@ -178,7 +168,6 @@
                                         <option value="">Pilih Tipe</option>
                                         <option value="ADM">Admin</option>
                                         <option value="USR">User</option>
-                                        <option value="JMT">Jemaat</option>
                                     </select>
                                 </div>
                                 @error('user_type') <span class="text-danger">{{ $message }}</span> @enderror
@@ -317,7 +306,6 @@
                                         <option value="">Pilih Tipe</option>
                                         <option value="ADM">Admin</option>
                                         <option value="USR">User</option>
-                                        <option value="JMT">Jemaat</option>
                                     </select>
                                 </div>
                                 @error('user_type') <span class="text-danger">{{ $message }}</span> @enderror

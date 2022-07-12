@@ -285,6 +285,11 @@ class FixedAssetComponent extends Component
         $this->findAssetDetail = null;
     }
 
+    public function printFixedAsset(int $fixedAssId)
+    {
+        dd($fixedAssId);
+    }
+
     public function render()
     {
         $jeins_fxs = JenisFixedAsset::all();

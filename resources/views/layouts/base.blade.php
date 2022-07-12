@@ -250,7 +250,7 @@
                                       Jemaat <span class="fw-bold">{{ $jemaat != null ? $jemaat->nama_jemaat : "!" }}</span>, sebagai <span class="fw-bold">{{ $jabatan != null ? $jabatan->nama_jabatan : "!" }}</span>
                                     </p>
             
-                                    <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Profile</a>
+                                    <a href="{{ route('myProfile') }}" class="btn btn-sm btn-outline-primary">View Profile</a>
                                 </div>
                             </div>
                             <div class="col-sm-5 text-end">

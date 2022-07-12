@@ -61,23 +61,9 @@
         <hr class="my-0" />
         <div class="card-body">
             <div class="row">
-                @php
-                $jemaat = null;
-                $jabatan = null;
-                $namaJem = null;
-                $namaJab = null;
-                if ($profile->jemaat_id) {
-                    $jemaat = $profile->jemaat->kode_jemaat;
-                    $namaJem = $profile->jemaat->nama_jemaat;
-                }
-                if ($profile->jabatan_id) {
-                    $jabatan = $profile->jabatan->kode_jabatan;
-                    $namaJab = $profile->jabatan->nama_jabatan;
-                }
-                @endphp
                 <div class="mb-3 col-md-3">
                     <label for="userId" class="form-label">User ID</label>
-                    <input class="form-control" type="text" id="userId" value="{{ $jemaat != null ? $jemaat : "!" }}{{ $jabatan != null ? $jabatan : "!" }}" readonly />
+                    <input class="form-control" type="text" id="userId" value="{{ $profile->jemaat_id != null ? $profile->jemaat->kode_jemaat : "!" }}{{ $profile->jabatan_id != null ? $profile->jabatan->kode_jabatan : "!" }}" readonly />
                 </div>
                 <div class="mb-3 col-md-3">
                     <label for="tipeAkun" class="form-label">Tipe Akun</label>
@@ -85,11 +71,11 @@
                 </div>
                 <div class="mb-3 col-md-3">
                     <label for="jemaat" class="form-label">Jemaat</label>
-                    <input class="form-control" type="text" id="jemaat" value="{{ $namaJem != null ? $namaJem : "!" }}" readonly />
+                    <input class="form-control" type="text" id="jemaat" value="{{ $profile->jemaat_id != null ? $profile->jemaat->nama_jemaat : "!" }}" readonly />
                 </div>
                 <div class="mb-3 col-md-3">
                     <label for="jabatan" class="form-label">Jabatan</label>
-                    <input class="form-control" type="text" id="jabatan" value="{{ $namaJab != null ? $namaJab : "!" }}" readonly />
+                    <input class="form-control" type="text" id="jabatan" value="{{ $profile->jabatan_id != null ? $profile->jabatan->nama_jabatan : "!" }}" readonly />
                 </div>
                 <hr class="mb-3 mt-2" />
 

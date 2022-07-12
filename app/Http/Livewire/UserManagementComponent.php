@@ -87,23 +87,13 @@ class UserManagementComponent extends Component
     public function editDataUser(int $user_id){
         $user = User::find($user_id);
         if($user){
-            $kodeJem = "!";
-            $kodeJab = "!";
-            if($user->jemaat_id){
-                $this->selectJemaat = $user->jemaat_id;
-                $kodeJem = $user->jemaat->kode_jemaat;
-            }else{
-                $this->selectJemaat = null;
-            }
-            if($user->jabatan_id){
-                $this->selectJabatan = $user->jabatan_id;
-                $kodeJab = $user->jabatan->kode_jabatan;
-            }else{
-                $this->selectJabatan = null;
-            }
-            
+            $kodeJab = $user->jemaat_id != null ? $user->jemaat->kode_jemaat : "!";
+            $kodeJem = $user->jabatan_id != null ? $user->jabatan->kode_jabatan : "!";
+
             $this->id_user = $user->id;
-            $this->user_id = $kodeJem . $kodeJab;
+            $this->selectJemaat = $user->jemaat_id != null ? $user->jemaat_id : null;
+            $this->selectJabatan = $user->jabatan_id != null ? $user->jabatan_id : null;
+            $this->user_id = $kodeJab . $kodeJem;
             $this->name = $user->name;
             $this->email = $user->email;
             $this->no_phone = $user->no_phone;

@@ -72,7 +72,7 @@
                                     <th><strong>Terbit Oleh</strong></th>
                                     <th><strong>No IMB</strong></th>
                                     <th class="text-center"><strong>Status</strong></th>
-                                    <th class="text-center" width="110"><strong>Actions</strong></th>
+                                    <th class="text-center" width="115"><strong>Actions</strong></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,8 +105,9 @@
                                         </td>
                                         <td class="text-center">
                                             @if (Auth::user()->user_type == "ADM")
+                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-detailUser-assets" wire:click="detailDataFixedAsset({{ $ast->id }})"><i class='bx bx-info-circle me-1'></i></a>
                                                 <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-editData-assets" wire:click="editDataFixedAsset({{ $ast->id }})"><i class="bx bx-edit-alt me-1"></i></a>
-                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-delete-assets" wire:click="deleteFixedAsset({{ $ast->id }})"><i class="bx bx-trash me-1"></i></a>
+                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-delete-assets" wire:click="deleteFixedAsset({{ $ast->id }})"><i class="bx bx-trash"></i></a>
                                             @else
                                                 <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal-detailUser-assets" wire:click="detailDataFixedAsset({{ $ast->id }})"><i class='bx bx-info-circle'></i> Detail</a>
                                             @endif
@@ -464,6 +465,7 @@
                         <button wire:click="resetFormAddAsset" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
+                        <button type="button" class="btn btn-success"><i class='bx bx-printer'></i> Print</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
@@ -507,7 +509,7 @@
                     <div class="row">
                         <div class="col-md-3 mb-2">
                             <label class="form-label">Jemaat <span class="text-danger">*</span></label>
-                            <div><h5>{{ $findAssetDetail->jemaat->nama_jemaat }}</h5></div>
+                            <div><h5>{{ $findAssetDetail->jemaat_id != null ? $findAssetDetail->jemaat->nama_jemaat : "!" }}</h5></div>
                         </div>
                         <div class="col-md-3 mb-2">
                             <label class="form-label">Jenis Fixed <span class="text-danger">*</span></label>
@@ -720,6 +722,10 @@
                     <button wire:click="resetModelDetailAsset" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
+                    
+                    @if ($findAssetDetail)
+                    <button type="button" class="btn btn-success" wire:click="printFixedAsset({{ $findAssetDetail->id }})"><i class='bx bx-printer'></i> Print</button>
+                    @endif
                 </div>
             </div>
         </div>
