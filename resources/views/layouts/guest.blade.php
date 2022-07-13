@@ -146,6 +146,30 @@
             {{ Session::get('msgDeleteUser') }}
         </div>
     </div>
+    @elseif (Session::has('fixedAssetPdfDenied'))
+    <div class="bs-toast toast fade show bg-warning toast-placement-ex top-0 end-0"
+        style="margin-top: 20px; margin-right: 25px" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="bx bx-bell me-2"></i>
+            <div class="me-auto fw-semibold">Document Denied!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ Session::get('fixedAssetPdfDenied') }}
+        </div>
+    </div>
+    @elseif (Session::has('msgUserInactive'))
+    <div class="bs-toast toast fade show bg-info toast-placement-ex top-0 end-0"
+        style="margin-top: 20px; margin-right: 25px" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="bx bx-bell me-2"></i>
+            <div class="me-auto fw-semibold">Security Alert!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ Session::get('msgUserInactive') }}
+        </div>
+    </div>
     @endif
     <div class="container-xxl">
         <!-- Form -->

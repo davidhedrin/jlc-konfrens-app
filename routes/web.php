@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function(){
 });
 
 //For User
-Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+Route::middleware(['auth:sanctum', 'verified', 'checkactiveuser'])->group(function(){
     Route::get('/', HomeComponent::class)->name('index');
     Route::get('/my-profile', ProfileComponent::class)->name('myProfile');
     Route::get('/all-assets', FixedAssetComponent::class)->name('all.assets');
