@@ -31,11 +31,11 @@
                         </div>
                         <div class="mb-3 d-flex justify-content-between">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember_me" wire:model="remember" />
+                                <input class="form-check-input" type="checkbox" id="remember_me" wire:model.defer="remember" />
                                 <label class="form-check-label" for="remember_me"> Remember Me </label>
                             </div>
-                            <a href="">
-                                <small>Forgot Password?</small>
+                            <a href="{{ route('forgot.password') }}">
+                                <span>Lupa Password?</span>
                             </a>
                         </div>
                         <div class="mb-3">

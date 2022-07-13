@@ -15,6 +15,8 @@ use App\Http\Livewire\FixedAssetComponent;
 use App\Http\Livewire\ConvertPdfAssetComponent;
 
 use App\Http\Livewire\Auth\VerificationComponent;
+use App\Http\Livewire\Auth\ForgotPasswordComponent;
+use App\Http\Livewire\Auth\FormForgotPasswordComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,7 @@ use App\Http\Livewire\Auth\VerificationComponent;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes(['verify' => true]);
+Auth::routes(['password.reset' => false, 'password.request' => false, 'logout' => false, 'verify' => true]);
 Route::get('/email/verify', VerificationComponent::class)->middleware('auth')->name('verification.notice');
 
 Route::get('/logout', LogoutComponent::class)->name('logout');
@@ -35,6 +37,9 @@ Route::get('/logout', LogoutComponent::class)->name('logout');
 Route::middleware('guest')->group(function(){
     Route::get('/login', LoginComponent::class)->name('login');
     Route::get('/register', RegisterComponent::class)->name('register');
+    Route::get('/forgot-password', ForgotPasswordComponent::class)->name('forgot.password');
+
+    Route::get('/password/reset/{token}', FormForgotPasswordComponent::class)->name('password.reset');
 });
 
 //For User
