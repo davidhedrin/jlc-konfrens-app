@@ -130,7 +130,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <td><img src="{{ public_path('assets/img/icons/gmahkLogo.png') }}"></td>
+                        <td><img src="{{ public_path('assets/img/icons/gmahkLogo.png') }}" alt="Logo"></td>
                         <td style="padding-left: 15px; line-height: 2px;">
                             <h1 style="text-decoration: underline">JLC Konfrens DKI</h1>
                             <div>Konfrens DKI Jakarta dan Sekitarnya</div>
@@ -154,23 +154,23 @@
                     <body>
                         <tr>
                             <td class="text-center-client" style="text-align: center">
-                                <div class="text-content-table">{{ $findAssetDetail->atas_nama }}</div>
+                                <div class="text-content-table">{{ $findAssetDetail->atas_nama != null ? $findAssetDetail->atas_nama : "-kosong-" }}</div>
                                 <span class="text-title-table">Nama</span>
                             </td>
                             <td class="text-center-client text-centers-clients">
-                                <div class="text-content-table">{{ $findAssetDetail->tgl_sertifikat }}</div>
+                                <div class="text-content-table">{{ $findAssetDetail->tgl_sertifikat != null ? $findAssetDetail->tgl_sertifikat : "-kosong-" }}</div>
                                 <span class="text-title-table">Tgl. Sertif</span>
                             </td>
                             <td class="text-center-client text-centers-clients">
-                                <div class="text-content-table">{{ $findAssetDetail->jenisAsset->nama_jenis_fixed_asset }}</div>
+                                <div class="text-content-table">{{ $findAssetDetail->jenis_fixed_id != null ? $findAssetDetail->jenisAsset->nama_jenis_fixed_asset : "-kosong-" }}</div>
                                 <span class="text-title-table">Jenis</span>
                             </td>
                             <td class="text-center-client text-centers-clients">
-                                <div class="text-content-table">{{ $findAssetDetail->tgl_expired }}</div>
+                                <div class="text-content-table">{{ $findAssetDetail->tgl_expired != null ? $findAssetDetail->tgl_expired : "-kosong-" }}</div>
                                 <span class="text-title-table">Tgl. Exp</span>
                             </td>
                             <td class="text-center-client text-centers-clients">
-                                <div class="text-content-table">{{ $findAssetDetail->jemaat_id != null ? $findAssetDetail->jemaat->nama_jemaat : "!" }}</div>
+                                <div class="text-content-table">{{ $findAssetDetail->jemaat_id != null ? $findAssetDetail->jemaat->nama_jemaat : "-kosong-" }}</div>
                                 <span class="text-title-table">Jemaat</span>
                             </td>
                         </tr>
@@ -178,7 +178,7 @@
                 </table>
             </div>
             <div id="invoice">
-                <h1>{{ $findAssetDetail->no_sertifikat }}</h1>
+                <h1>{{ $findAssetDetail->no_sertifikat != null ? $findAssetDetail->no_sertifikat : "-kosong-" }}</h1>
                 <div style="font-style: italic; margin-top: 0px; margin-bottom:6px">no sertifikat</div>
             </div>
         </div>
@@ -188,70 +188,70 @@
                 <tbody>
                     <tr>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->status_kepemilikan }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->status_kepemilikan != null ? $findAssetDetail->status_kepemilikan : "-kosong-" }}</div>
                             <span class="text-title-table">Status Kepemilikan</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->terbit_oleh }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->terbit_oleh != null ? $findAssetDetail->terbit_oleh : "-kosong-" }}</div>
                             <span class="text-title-table">Diterbitkan Oleh</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->luas_tanah }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->luas_tanah != null ? $findAssetDetail->luas_tanah : "-kosong-" }}</div>
                             <span class="text-title-table">Luas Tanah (M2)</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->nama_bangunan }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->nama_bangunan != null ? $findAssetDetail->nama_bangunan : "-kosong-" }}</div>
                             <span class="text-title-table">Bangunan</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->no_imb }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->no_imb != null ? $findAssetDetail->no_imb : "-kosong-" }}</div>
                             <span class="text-title-table">Nomor IMB</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->tgl_imb }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->tgl_imb != null ? $findAssetDetail->tgl_imb : "-kosong-" }}</div>
                             <span class="text-title-table">Tanggal IMB</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->tgl_mulai_kerjasama }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->tgl_mulai_kerjasama != null ? $findAssetDetail->tgl_mulai_kerjasama : "-kosong-" }}</div>
                             <span class="text-title-table">Tgl Mulai Kerjasama</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->tgl_akhir_kerjasama }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->tgl_akhir_kerjasama != null ? $findAssetDetail->tgl_akhir_kerjasama : "-kosong-" }}</div>
                             <span class="text-title-table">Tgl Berakhir Kerjasama</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->posisi_surat }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->posisi_surat != null ? $findAssetDetail->posisi_surat : "-kosong-" }}</div>
                             <span class="text-title-table">Posisi Surat</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->pihak_ke3 }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->pihak_ke3 != null ? $findAssetDetail->pihak_ke3 : "-kosong-" }}</div>
                             <span class="text-title-table">Kerjasama Pihak Ke 3</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->manfaat_untuk }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->manfaat_untuk != null ? $findAssetDetail->manfaat_untuk : "-kosong-" }}</div>
                             <span class="text-title-table">Pemanfaatan untuk</span>
                         </td>
                         <td class="text-center">
-                            <div class="text-content-table">{{ $findAssetDetail->tgl_ke_konfrens }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->tgl_ke_konfrens != null ? $findAssetDetail->tgl_ke_konfrens : "-kosong-" }}</div>
                             <span class="text-title-table">Tgl Ke Konfrens</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td class="text-center" colspan="4">
-                            <div class="text-content-table">{{ $findAssetDetail->lok_fisik_bangunan }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->lok_fisik_bangunan != null ? $findAssetDetail->lok_fisik_bangunan : "-kosong-" }}</div>
                             <span class="text-title-table">Lokasi Fisi Bangunan</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="text-center" colspan="4">
-                            <div class="text-content-table">{{ $findAssetDetail->ket_sertifikat }}</div>
+                            <div class="text-content-table">{{ $findAssetDetail->ket_sertifikat != null ? $findAssetDetail->ket_sertifikat : "-kosong-" }}</div>
                             <span class="text-title-table">Keterangan</span>
                         </td>
                     </tr>

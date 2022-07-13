@@ -39,6 +39,7 @@
                                 <tr>
                                     <th width="10"><strong>No</strong></th>
                                     <th><strong>User ID</strong></th>
+                                    <td><strong>Ver. Email</strong></td>
                                     <th><strong>Nama</strong></th>
                                     <th><strong>Email</strong></th>
                                     <th><strong>Phone</strong></th>
@@ -53,6 +54,7 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $u->jemaat_id != null ? $u->jemaat->kode_jemaat : "!" }}{{ $u->jabatan_id != null ? $u->jabatan->kode_jabatan : "!" }}</td>
+                                    <td class="text-{{ $u->email_verified_at != null ? "success" : "danger" }}">{{ $u->email_verified_at != null ? "VERIFIED" : "NO-VERIFIED" }}</td>
                                     <td>{{ $u->name }}</td>
                                     <td>{{ $u->email }}</td>
                                     <td>{{ $u->no_phone }}</td>
