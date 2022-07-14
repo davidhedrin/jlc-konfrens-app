@@ -290,9 +290,9 @@ class FixedAssetComponent extends Component
         $this->findAssetDetail = null;
     }
 
-    public function printFixedAsset(int $fixedAssId)
+    public function downloadDocumentAsset($assetDocName)
     {
-        dd($fixedAssId);
+        return response()->download(public_path('assets/img/fixedAssets/'.$assetDocName));
     }
 
     public function render()

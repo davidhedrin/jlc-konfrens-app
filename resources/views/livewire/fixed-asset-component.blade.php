@@ -669,7 +669,11 @@
                         <div class="col-md-3 mb-2">
                             <label class="form-label" for="newsertifikat_file">Sertifikat</label>
                             @if ($findAssetDetail->sertifikat_file)
-                            <div><h5>{{ $findAssetDetail->sertifikat_file }}</h5></div>
+                            <div>
+                                <a href="javascript:void(0)" wire:click="downloadDocumentAsset('{{ $findAssetDetail->sertifikat_file }}')">
+                                    <h5 class="text-info">{{ $findAssetDetail->sertifikat_file }} <i class='bx bx-download' style="font-size: 25px"></i></h5>
+                                </a>
+                            </div>
                             @else
                             <div><h5>-</h5></div>
                             @endif
@@ -677,7 +681,11 @@
                         <div class="col-md-3 mb-2">
                             <label class="form-label" for="newimb_file">IMB</label>
                             @if ($findAssetDetail->imb_file)
-                            <div><h5>{{ $findAssetDetail->imb_file }}</h5></div>
+                            <div>
+                                <a href="javascript:void(0)" wire:click="downloadDocumentAsset('{{ $findAssetDetail->imb_file }}')">
+                                    <h5 class="text-info">{{ $findAssetDetail->imb_file }} <i class='bx bx-download' style="font-size: 25px"></i></h5>
+                                </a>
+                            </div>
                             @else
                             <div><h5>-</h5></div>
                             @endif
@@ -685,7 +693,11 @@
                         <div class="col-md-3 mb-2">
                             <label class="form-label" for="newhistory_file">History</label>
                             @if ($findAssetDetail->history_file)
-                            <div><h5>{{ $findAssetDetail->history_file }}</h5></div>
+                            <div>
+                                <a href="javascript:void(0)" wire:click="downloadDocumentAsset('{{ $findAssetDetail->history_file }}')">
+                                    <h5 class="text-info">{{ $findAssetDetail->history_file }} <i class='bx bx-download' style="font-size: 25px"></i></h5>
+                                </a>
+                            </div>
                             @else
                             <div><h5>-</h5></div>
                             @endif
@@ -693,7 +705,11 @@
                         <div class="col-md-3 mb-2">
                             <label class="form-label" for="newdoc_kerjasama">Dok Kerjasama</label>
                             @if ($findAssetDetail->doc_kerjasama)
-                            <div><h5>{{ $findAssetDetail->doc_kerjasama }}</h5></div>
+                            <div>
+                                <a href="javascript:void(0)" wire:click="downloadDocumentAsset('{{ $findAssetDetail->doc_kerjasama }}')">
+                                    <h5 class="text-info">{{ $findAssetDetail->doc_kerjasama }} <i class='bx bx-download' style="font-size: 25px"></i></h5>
+                                </a>
+                            </div>
                             @else
                             <div><h5>-</h5></div>
                             @endif
