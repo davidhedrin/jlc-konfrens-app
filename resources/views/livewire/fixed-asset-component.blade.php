@@ -72,7 +72,7 @@
                                     <th><strong>Terbit Oleh</strong></th>
                                     <th><strong>No IMB</strong></th>
                                     <th class="text-center"><strong>Status</strong></th>
-                                    <th class="text-center" width="115"><strong>Actions</strong></th>
+                                    <th class="text-center"><strong>Actions</strong></th>
                                 </tr>
                             </thead>
                             <tbody>

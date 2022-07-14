@@ -16,20 +16,20 @@
     <div class="row">
         <div class="col-lg-12 mb-4 order-0">
             <div class="card">
-                <div class="card-header row">
-                    <div class="col-md-6">
-                        <h5 class="mb-0">Tabel Jabatan Jemaat:</h5>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-end">
-                            <div style="margin-right: 10px">
-                                <input wire:model="search" class="form-control" style="width: 250px" type="search" id="search-user" placeholder="Temukan Jabatan...">
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#modal-fromAdd-jabatan">Tambah</button>
-                            </div>
+                <div class="card-header">
+                    <div class="row gx-3 gy-2 align-items-center">
+                        <div class="col-md-9">
+                            <h5 class="mb-0">Tabel Jabatan Jemaat:</h5>
                         </div>
+                        <div class="col-md-2">
+                            <input wire:model="search" class="form-control" type="search" id="search-user" placeholder="Temukan Jabatan...">
+                        </div>
+                        @if (Auth::user()->user_type == "ADM")
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#modal-fromAdd-jabatan">Tambah</button>
+                        </div>
+                        @endif
                     </div>
                 </div>
 
